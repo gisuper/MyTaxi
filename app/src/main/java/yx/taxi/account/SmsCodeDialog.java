@@ -214,8 +214,9 @@ class SmsCodeDialog extends Dialog implements ISmsCodeDialogView {
         @Override
         public void onFinish() {
             mResentBtn.setTextColor(Color.BLACK);
-            mResentBtn.setEnabled(true);
+              mResentBtn.setEnabled(true);
             mResentBtn.setText(getContext().getString(R.string.resend));
+
             cancel();
         }
     };
