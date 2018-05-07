@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="yx.taxi.main.MainActivity">
+        <activity android:name="yx.taxi.account.mvp.view.MainActivity">
         </activity>
     </application>
 

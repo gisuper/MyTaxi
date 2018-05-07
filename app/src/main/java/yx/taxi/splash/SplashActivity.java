@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.yangxiong.mytaxi.R;
 
-import yx.taxi.main.MainActivity;
+import yx.taxi.account.mvp.view.MainActivity;
 
 
 /**

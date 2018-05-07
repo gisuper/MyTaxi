@@ -17,11 +17,12 @@ import android.widget.TextView;
 import com.dalimao.corelibrary.VerificationCodeInput;
 import com.yangxiong.mytaxi.R;
 
-import yx.taxi.account.model.AccountManagerImpl;
-import yx.taxi.account.model.IAccountManager;
-import yx.taxi.account.presenter.ISmsCodeDialogPresenter;
-import yx.taxi.account.presenter.SmsCodeDialogPresenterImpl;
-import yx.taxi.account.view.ISmsCodeDialogView;
+import yx.taxi.account.mvp.model.AccountManagerImpl;
+import yx.taxi.account.mvp.model.IAccountManager;
+import yx.taxi.account.mvp.presenter.ISmsCodeDialogPresenter;
+import yx.taxi.account.mvp.presenter.SmsCodeDialogPresenterImpl;
+import yx.taxi.account.mvp.view.ISmsCodeDialogView;
+import yx.taxi.common.databus.RxBus;
 import yx.taxi.common.http.IHttpClient;
 import yx.taxi.common.http.impl.OkHttpClientImpl;
 import yx.taxi.common.util.ToastUtil;
@@ -79,7 +80,9 @@ class SmsCodeDialog extends Dialog implements ISmsCodeDialogView {
         mErrorView.setVisibility(View.GONE);
 
         initListener( );
+        RxBus.getInstance().register(mPresenter);
         requestSendSmsCode( );
+
     }
 
     private void requestSendSmsCode() {
@@ -156,6 +159,7 @@ class SmsCodeDialog extends Dialog implements ISmsCodeDialogView {
     @Override
     public void dismiss() {
         super.dismiss();
+        RxBus.getInstance().unRegister(mPresenter);
     }
 
     @Override

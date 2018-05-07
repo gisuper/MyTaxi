@@ -13,11 +13,12 @@ import android.widget.TextView;
 import com.yangxiong.mytaxi.R;
 
 import yx.taxi.TaxiApplication;
-import yx.taxi.account.model.AccountManagerImpl;
-import yx.taxi.account.model.IAccountManager;
-import yx.taxi.account.presenter.ILoginDialogPresenter;
-import yx.taxi.account.presenter.LoginDialogPresenterImpl;
-import yx.taxi.account.view.ILoginView;
+import yx.taxi.account.mvp.model.AccountManagerImpl;
+import yx.taxi.account.mvp.model.IAccountManager;
+import yx.taxi.account.mvp.presenter.ILoginDialogPresenter;
+import yx.taxi.account.mvp.presenter.LoginDialogPresenterImpl;
+import yx.taxi.account.mvp.view.ILoginView;
+import yx.taxi.common.databus.RxBus;
 import yx.taxi.common.http.IHttpClient;
 import yx.taxi.common.http.impl.OkHttpClientImpl;
 import yx.taxi.common.storage.SharedPreferencesDao;
@@ -66,11 +67,13 @@ public class LoginDialog extends Dialog implements ILoginView {
         View root = inflater.inflate(R.layout.dialog_login_input, null);
         setContentView(root);
         initViews();
+        RxBus.getInstance().register(mPresenter);
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
+        RxBus.getInstance().unRegister(mPresenter);
     }
 
     private void initViews() {

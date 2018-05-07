@@ -1,4 +1,4 @@
-package yx.taxi.account.view;
+package yx.taxi.account.mvp.view;
 
 /**
  * Created by yangxiong on 2018/5/3/003.

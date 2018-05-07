@@ -1,4 +1,4 @@
-package yx.taxi.account.model;
+package yx.taxi.account.mvp.model;
 
 import android.os.Handler;
 

@@ -12,10 +12,11 @@ import android.widget.TextView;
 
 import com.yangxiong.mytaxi.R;
 
-import yx.taxi.account.model.AccountManagerImpl;
-import yx.taxi.account.presenter.CreatePSWDialogPresenterImpl;
-import yx.taxi.account.presenter.ICreatePSWDialogPresenter;
-import yx.taxi.account.view.ICreatePSWDialogView;
+import yx.taxi.account.mvp.model.AccountManagerImpl;
+import yx.taxi.account.mvp.presenter.CreatePSWDialogPresenterImpl;
+import yx.taxi.account.mvp.presenter.ICreatePSWDialogPresenter;
+import yx.taxi.account.mvp.view.ICreatePSWDialogView;
+import yx.taxi.common.databus.RxBus;
 import yx.taxi.common.http.IHttpClient;
 import yx.taxi.common.http.impl.OkHttpClientImpl;
 import yx.taxi.common.util.ToastUtil;
@@ -74,7 +75,7 @@ public class CreatePasswordDialog extends Dialog implements ICreatePSWDialogView
     @Override
     public void dismiss() {
         super.dismiss( );
-
+        RxBus.getInstance().unRegister(mPresenter);
     }
 
     @Override
@@ -83,7 +84,9 @@ public class CreatePasswordDialog extends Dialog implements ICreatePSWDialogView
         View view = getLayoutInflater( ).inflate(R.layout.dialog_create_pw, null);
         setContentView(view);
         initView( );
+        RxBus.getInstance().register(mPresenter);
     }
+
 
     private void initView() {
         mPhone = (TextView) findViewById(R.id.phone);
